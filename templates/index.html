@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <link rel="icon" type="image/png" href="/static/images/favicon.ico">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and jQuery -->
+    <link rel="stylesheet" href="static/css/custom.css">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+    <script>
+      $(function(){
+        $("#datadict").tablesorter({widgets: ['zebra']});
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+    {% block headercontent %}{% endblock %}
+    </header>
+    {% block content %}{% endblock %}
+    <div class="table-responsive">
+      <table class="table" id="datadict">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Label</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for data_field in datadict %}
+          <tr><td>{{ data_field.name }}</td><td>{{ data_field.label }}</td><td>{{ data_field.description }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <footer>{% block footercontent %}{% endblock %}</footer>
+  </body>
+</html>
