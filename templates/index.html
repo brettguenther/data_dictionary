@@ -13,16 +13,41 @@
     <script>
       $(function(){
         $("#datadict").tablesorter({widgets: ['zebra']});
+        $("table").tablesorter();
       });
+    </script>
+    <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("datadict");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
     </script>
   </head>
   <body>
     <header>
-    {% block headercontent %}{% endblock %}
+    {% block headercontent %}<h2>Data Dictionary:</h2>{% endblock %}
     </header>
-    {% block content %}{% endblock %}
+    {% block content %}
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for fields...">
+    {% endblock %}
     <div class="table-responsive">
-      <table class="table" id="datadict">
+      <table class="table" id="datadict" class="tablesorter">
         <thead>
         <tr>
           <th>Name</th>
